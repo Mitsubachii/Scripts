@@ -2,30 +2,22 @@ using UnityEngine;
 
 public static class Utilitarios
 {
-    public static bool Critical(float critChance) => Random.value < critChance;
+    public static bool Critical(float CritChance) => Random.value < CritChance;
 
-    public static float CalcDmgBase(float damageMin, float damageMax) => Random.Range(damageMin, damageMax);
+    public static float CalcDmgBase(float DamageMin, float DamageMax) => Random.Range(DamageMin, DamageMax);
 
-    public static float CalcDmgTotal(float damageMin, float damageMax, float critChance, float critMulti)
+    public static float CalcDmgTotal(float DamageMin, float DamageMax, float CritChance, float CritMulti)
     {
-        float danoBase = CalcDmgBase(damageMin, damageMax);
-
-        if (Critical(critChance))
-        {
-            return danoBase * critMulti;
-        }
-        else
-        {
-            return danoBase;
-        }
+        float danoBase = CalcDmgBase(DamageMin, DamageMax);
+        return Critical(CritChance) ? danoBase * CritMulti : danoBase;
     }
 
-    public static double GainExp(double currentExp, double expOnDeath) => currentExp + expOnDeath;
+    public static double GainExp(double CurrentExp, double expOnDeath) => CurrentExp + expOnDeath;
 
-    public static bool Level_Up(double currentExp, double maxExp, int level, int maxLevel) => level <= maxLevel && currentExp >= maxExp;
+    public static bool Level_Up(double CurrentExp, double MaxExp, int level, int MaxLevel) => level <= MaxLevel && CurrentExp >= MaxExp;
 
-    public static float HealthControl(float currentHealth, float maxHealth) => Mathf.Clamp(currentHealth, 0, maxHealth);
+    public static float HealthControl(float CurrentHealth, float MaxHealth) => Mathf.Clamp(CurrentHealth, 0, MaxHealth);
 
-    public static float ManaControl(float currentMana, float maxMana) => Mathf.Clamp(currentMana, 0, maxMana);
+    public static float ManaControl(float CurrentMana, float MaxMana) => Mathf.Clamp(CurrentMana, 0, MaxMana);
 
 }

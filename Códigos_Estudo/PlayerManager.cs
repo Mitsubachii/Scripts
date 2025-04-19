@@ -3,35 +3,31 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     PlayerStatus ps;
-
     void Start()
     {
         ps = new PlayerStatus(100f, 100f, 50f, 50f, 0f, 50f, 1f, 3f, 0.2f, 2f, "Fisico", 1);
+        AtualizarVida();
+        AtualizarMana();
     }
-
-
-    private void aumentarLevel()
+    private void AumentarLevel()
     {
-        if(Utilitarios.Level_Up(ps.currentExp, ps.maxExp, ps.level, ps.maxLevel))
+        if(Utilitarios.Level_Up(ps.CurrentExp, ps.MaxExp, ps.Level, ps.MaxLevel))
         {
-            ps.level ++;
-            ps.maxHealth += 5;
-            ps.maxMana += 2;
-            ps.damageMin += 1;
-            ps.damageMax += 1;
+            ps.Level ++;
+            ps.MaxHealth += 5;
+            ps.MaxMana += 2;
+            ps.DamageMin += 1;
+            ps.DamageMax += 1;
         }
     }
 
     private void CalcularDano()
     {
-        ps.critChance = 0.2f;
-        ps.critMulti = 2f;
-        ps.danoFinal();
+        ps.CritChance = 0.2f;
+        ps.CritMulti = 2f;
+        ps.DanoFinal();
     }
-
-    private void Die() => ps.currentHealth = 0;
-
-    private void AtualizarVida() => ps.currentHealth = Utilitarios.HealthControl(ps.currentHealth, ps.maxHealth);
-    private void AtualizarMana() => ps.currentMana = Utilitarios.ManaControl(ps.currentMana, ps.maxMana);
-    
+    private void Die() => ps.CurrentHealth = 0;
+    private void AtualizarVida() => ps.CurrentHealth = Utilitarios.HealthControl(ps.CurrentHealth, ps.MaxHealth);
+    private void AtualizarMana() => ps.CurrentMana = Utilitarios.ManaControl(ps.CurrentMana, ps.MaxMana);
 }
